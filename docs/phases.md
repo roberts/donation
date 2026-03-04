@@ -25,13 +25,12 @@
 - [X] Total donations
 - [X] Total donations for X tax year (see phase 3 tax year)
 - [X] Lookup donors & transaction history
-- [ ] Backend user admin (ability to add / rem)
-  - *Note: CLI commands exist for user management*
+- [X] Backend user admin (ability to add / rem)
 - [ ] Everybody uses Google at IBEF so should we just use Google SSO? Take care of the MFA too? And password reset?
 - [ ] Refund transactions (will show in donor transaction history) Some refunds via stripe were sent
 - [ ] Move DB to Cloud SQL
 - [ ] Backend documentation
-- [ ] Manual Donations (offline donations via check / etc)
+- [X] Manual Donations (offline donations via check / etc)
 
 ---
 

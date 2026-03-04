@@ -1,0 +1,57 @@
+steps:
+  # 1. Build the Production Image
+  # Note: The Dockerfile we created will pick up the /public/build folder
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Build Image'
+    args: [
+      'build', 
+      '-t', 'gcr.io/$PROJECT_ID/laravel-app:$COMMIT_SHA', 
+      '-t', 'gcr.io/$PROJECT_ID/laravel-app:latest',
+      '.'
+    ]
+
+  # 3. Push to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Push Image'
+    args: ['push', 'gcr.io/$PROJECT_ID/laravel-app:$COMMIT_SHA']
+
+  # 4. Deploy to Cloud Run (Zero-Downtime)
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: 'Deploy'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'laravel-prod'
+      - '--image=gcr.io/$PROJECT_ID/laravel-app:$COMMIT_SHA'
+      - '--region=${_REGION}'
+      - '--add-cloudsql-instances=${_CLOUD_SQL_CONNECTION}'
+      - '--set-secrets=/app/.env=LARAVEL_ENV:latest'
+      - '--allow-unauthenticated'
+      # Health Checks (Probes)
+      - '--liveness-probe-path=/up'
+      - '--liveness-probe-initial-delay-seconds=10'
+      - '--startup-probe-path=/up'
+      - '--startup-probe-initial-delay-seconds=5'
+      - '--startup-probe-period-seconds=10'
+      - '--startup-probe-failure-threshold=10'
+
+  # 5. Run Migrations (Forge: php artisan migrate --force)
+  # We use a Cloud Run Job to ensure the migration has full access to the DB
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: 'Migrate'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'jobs'
+      - 'execute'
+      - 'laravel-migrate'
+      - '--region=${_REGION}'
+      - '--wait'
+
+substitutions:
+  _REGION: 'us-central1'
+  _CLOUD_SQL_CONNECTION: 'project:region:instance' # Set this in your Build Trigger settings
+
+images:
+  - 'gcr.io/$PROJECT_ID/laravel-app:$COMMIT_SHA'

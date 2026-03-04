@@ -9,7 +9,9 @@
 /resources/js/actions
 /resources/js/routes
 /resources/js/wayfinder
+/var
 /vendor
+/tests/Browser/Screenshots
 .DS_Store
 .env
 .env.backup
