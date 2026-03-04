@@ -1,0 +1,131 @@
+<?php
+$titleBase = 'IBE Foundation Donation';
+$schoolId = $_GET['schoolId'] ?? null;
+if($schoolId){
+    $apiResult = file_get_contents("https://app.ibefoundation.org/api/school/{$schoolId}");
+    $jsonResult = json_decode($apiResult);
+    if($jsonResult->name){
+        $titleSuffix .= " - {$jsonResult->name}";
+    }
+}
+?>
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><?php echo "{$titleBase}{$titleSuffix}"; ?></title>
+    <meta property="og:title" content="<?php echo "{$titleBase}{$titleSuffix}"; ?>" />
+    <style>
+      .logo{
+        height: auto;
+        max-height: 50px;
+        transform: scale(1.1);
+        transform-origin: top center;
+      }
+      .logo2{
+        max-height: 80px;
+        width: auto;
+      }
+      .bg-ibeBlue{
+        background-color: #183762;
+      }
+      .mw20{
+        max-width: 20rem;
+      }
+      .roboto{
+        font-family: 'Roboto', Helvetica, Arial, Lucida, sans-serif !important;
+      }
+      .heading{
+        margin-top: 1.5rem;
+      }
+      .heading h1{
+        font-size: 1.5rem;
+      }
+      .heading h2{
+        font-size: 1.25rem;
+      }
+    </style>  
+    <link rel="icon" href="https://ibefoundation.org/wp-content/uploads/2023/07/cropped-IBE-Foundation-Icon-1000x-32x32.png" sizes="32x32" />
+    <link rel="icon" href="https://ibefoundation.org/wp-content/uploads/2023/07/cropped-IBE-Foundation-Icon-1000x-192x192.png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="https://ibefoundation.org/wp-content/uploads/2023/07/cropped-IBE-Foundation-Icon-1000x-180x180.png" />
+    <meta name="msapplication-TileImage" content="https://ibefoundation.org/wp-content/uploads/2023/07/cropped-IBE-Foundation-Icon-1000x-270x270.png" />
+    <script type="module" crossorigin src="/assets/index-B3baKkks.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DV3nfq5R.css">
+  </head>
+  <body>
+    <div class="grid">
+      <div class="flex bg-ibeBlue items-center justify-center roboto">
+        <div class="mt-2">
+          <a href="https://ibefoundation.org/"><img src="/ibef-logo.png" class="logo"></a>
+        </div>
+        <div class="et_pb_module et_pb_menu et_pb_menu_0_tb_header et_clickable et_pb_bg_layout_light  et_pb_text_align_right et_dropdown_animation_fade et_pb_menu--with-logo et_pb_menu--style-left_aligned">
+
+
+          <div class="et_pb_menu__wrap">
+            <div class="et_pb_menu__menu">
+              <nav class="et-menu-nav"><ul id="menu-main-menu" class="et-menu nav"><li id="menu-item-427" class="et_pb_menu_page_id-407 menu-item menu-item-type-post_type menu-item-object-page menu-item-427"><a href="https://ibefoundation.org/about-us/">About Us</a></li>
+<li id="menu-item-428" class="et_pb_menu_page_id-392 menu-item menu-item-type-post_type menu-item-object-page menu-item-428"><a href="https://ibefoundation.org/what-we-do/">What We Do</a></li>
+<li id="menu-item-430" class="et_pb_menu_page_id-430 menu-item menu-item-type-custom menu-item-object-custom menu-item-430"><a href="https://app.ibefoundation.org/">Donate Now</a></li>
+</ul></nav>
+            </div>
+            
+            
+            <!-- <div class="et_mobile_nav_menu">
+      <div class="mobile_nav closed">
+        <span class="mobile_menu_bar"></span>
+      <ul id="mobile_menu1" class="et_mobile_menu"><li id="menu-item-427" class="et_pb_menu_page_id-407 menu-item menu-item-type-post_type menu-item-object-page menu-item-427 et_first_mobile_item"><a href="https://ibefoundation.org/about-us/">About Us</a></li>
+<li id="menu-item-428" class="et_pb_menu_page_id-392 menu-item menu-item-type-post_type menu-item-object-page menu-item-428"><a href="https://ibefoundation.org/what-we-do/">What We Do</a></li>
+<li id="menu-item-430" class="et_pb_menu_page_id-430 menu-item menu-item-type-custom menu-item-object-custom menu-item-430"><a href="https://app.ibefoundation.org/">Donate Now</a></li>
+</ul></div>
+    </div> -->
+          </div>
+
+
+        </div>
+      </div>
+      <div class="d-flex flex-column text-center heading">
+        <h1><?php if($titleBase) echo $titleBase ?></h1>
+        <h2><?php if($jsonResult->name) echo $jsonResult->name ?></h2>
+      </div>
+      <div id="app"></div>
+      <div class="bg-ibeBlue p-8 gap-4 text-center roboto">
+        <div class="text-white">
+          <p class="mt-4">IBE Foundation | 921 North Swan Road, Tucson, Arizona 85711 | 520-200-7275 | services@ibefoundation.org</p>
+          <p class="mt-4">EIN: 93-1967631</p>
+          <div class="mt-4"><img src="/2023-IBE-Foundation-Logo-White-980x974.png" class="logo2 m-auto"></div>
+        </div>
+      </div>      
+    </div>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3RV71BM8Y5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-3RV71BM8Y5');
+    </script>
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+      var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+      (function(){
+      var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+      s1.async=true;
+      s1.src='https://embed.tawk.to/67ca5ff7374e52190e33d1b7/1iln8dnok';
+      s1.charset='UTF-8';
+      s1.setAttribute('crossorigin','*');
+      s0.parentNode.insertBefore(s1,s0);
+      })();
+    </script>
+    <!--End of Tawk.to Script-->  
+
+  </body>
+</html>
+
+

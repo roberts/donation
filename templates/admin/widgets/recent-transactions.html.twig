@@ -1,0 +1,28 @@
+<div class="col-sm widget recent-transactions">
+    <div class="p-3 border">
+
+    <div class='row align-items-center heading'>
+        <div class="col">{{ ux_icon('fa6-solid:credit-card', {class: 'icon', 'aria-hidden': true}) }} {{ ux_icon('fa6-solid:calendar-days', {class: 'icon', 'aria-hidden': true}) }}</div>
+        <div class="col text-end">
+            <h5 class='m-0'>Recent Transactions</h5>
+        </div>
+    </div>
+
+    <div class="col mt-2">
+        <table width="100%" >
+        <thead>
+            <tr><td>Date</td><td>Transaction ID</td><td>Status</td></tr>
+        </thead>
+        <tbody>
+        {% for t in recentTransactions %}
+        <tr>
+            <td>{{ t.created | date('F j, Y, g:i a') }}</td>
+            <td><a href="{{ ea_url().setController('App\\Controller\\Admin\\TransactionCrudController').setAction('detail').setEntityId(t.id) }}">{{t.id}}</a></td>
+            <td>{{ t.status | upper }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    </div>
+    </div>
+</div> 

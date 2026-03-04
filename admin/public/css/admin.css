@@ -1,0 +1,68 @@
+/* public/css/admin.css */
+:root {
+    /* make the base font size smaller */
+    --font-size-base: 13px;
+}
+:root,[data-bs-theme=light] {
+    --bs-logo: url(/ibef-logo-light.png);
+    --datatables-color: initial;
+    --datatables-sorting-color: initial;
+}
+:root,[data-bs-theme=dark]{
+    --bs-logo: url(/ibef-logo.png);
+    --datatables-color: unset;
+    --datatables-sorting-color: #333;
+}
+
+table.dashboard{
+    min-width: 100%;
+    font-family: monospace;
+}
+
+.navbar .logo-custom{
+    height: 75px;
+    background-repeat: no-repeat;
+    background-size: contain;        
+    background-position: center;
+    background-image: var(--bs-logo);
+}
+
+.dropdown-settings-button .fa-gear:before{
+    content: "\f06e";
+}
+
+#dt .filters select, #dt .filters input[type=text]{
+    max-width: 10em;
+}
+
+table.dataTable tfoot th, table.dataTable tfoot td{
+	padding: 8px;	
+}
+
+.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
+    color: var(--datatables-color);
+}
+
+.dataTables_wrapper .sorting_1{
+    color: var(--datatables-sorting-color);
+}
+
+/*#ea-index-Wine .list-pagination{
+    display: none;
+}*/
+
+.ea-detail .field-group.field-boolean {
+    flex-direction: unset;
+}
+
+.ea-detail .field-group.field-boolean .field-label {
+    flex: unset;
+    margin: unset;
+    min-inline-size: unset;
+    text-align: right;
+}
+
+.ea-detail .field-group.field-boolean .field-value {
+    text-align: left;
+    margin-left: 1em;
+}

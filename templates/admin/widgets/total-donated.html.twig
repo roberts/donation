@@ -1,0 +1,22 @@
+<div class="col-sm widget">
+    <div class="p-3 border">
+
+    <div class='row align-items-center heading'>
+        <div class="col">{{ ux_icon('fa6-solid:gift', {class: 'icon', 'aria-hidden': true}) }} {{ ux_icon('fa6-solid:money-check-dollar', {class: 'icon', 'aria-hidden': true}) }}</div>
+        <div class="col text-end">
+            <h5 class='m-0'>Donation Totals</h5>
+        </div>
+    </div>
+
+    <div class='row align-items-center'>
+        <div class="col text-center">
+            <div class='h6'><span class='h3 mx-2'>{{(donationTotals.donationTotal/100)|format_currency('USD')}}</span>in<span class='h3 mx-2'>{{donationTotals.donationCount}}</span>donations</div>
+            <hr>
+            {% for d in donationTotalsByYear %}
+            <div class='h6'><span class='h3 mx-2'>{{(d.donationTotal/100)|format_currency('USD')}}</span>in<span class='h3 mx-2'>{{d.donationCount}}</span>donations for filing year<span class='h3 mx-2'>{{d.filingYear}}</span></div>
+            {% endfor %}
+        </div>
+    </div>
+
+    </div>
+</div>

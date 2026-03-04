@@ -1,0 +1,30 @@
+<div class="col-sm widget recent-transactions">
+    <div class="p-3 border">
+
+    <div class='row align-items-center heading'>
+        <div class="col">{{ ux_icon('fa6-solid:gift', {class: 'icon', 'aria-hidden': true}) }} {{ ux_icon('fa6-solid:calendar-days', {class: 'icon', 'aria-hidden': true}) }}</div>
+        <div class="col text-end">
+            <h5 class='m-0'>Recent Donations</h5>
+        </div>
+    </div>
+
+    <div class="col mt-2">
+        <table width="100%" >
+        <thead>
+            <tr><td>Date</td><td>Donation ID</td><td>Name</td><td>Email</td><td class='text-end'>Amount</td></tr>
+        </thead>
+        <tbody>
+        {% for d in recentDonations %}
+        <tr>
+            <td>{{ d.created | date('F j, Y, g:i a') }}</td>
+            <td><a href="{{ ea_url().setController('App\\Controller\\Admin\\DonationCrudController').setAction('detail').setEntityId(d.id) }}">{{d.id}}</a></td>
+            <td>{{ d.fullName }}</td>
+            <td>{{ d.email }}</td>
+            <td class='text-end'>{{ (d.amount/100)|format_currency('USD') }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    </div>
+    </div>
+</div> 

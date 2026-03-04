@@ -1,0 +1,7 @@
+{
+    "require": {
+        "stripe/stripe-php": "^16.6",
+        "swiftmailer/swiftmailer": "^6.0",
+        "symfony/dotenv": "^7.2"
+    }
+}

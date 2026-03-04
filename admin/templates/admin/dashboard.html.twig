@@ -1,0 +1,62 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block head_favicon %}
+    <link rel="icon" href="https://ibefoundation.org/wp-content/uploads/2023/07/cropped-IBE-Foundation-Icon-1000x-32x32.png" sizes="32x32" />
+    <link rel="icon" href="https://ibefoundation.org/wp-content/uploads/2023/07/cropped-IBE-Foundation-Icon-1000x-192x192.png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="https://ibefoundation.org/wp-content/uploads/2023/07/cropped-IBE-Foundation-Icon-1000x-180x180.png" />
+    <meta name="msapplication-TileImage" content="https://ibefoundation.org/wp-content/uploads/2023/07/cropped-IBE-Foundation-Icon-1000x-270x270.png" />
+{% endblock %}
+
+{% block main %}
+
+<style>
+.widget .heading .icon{
+    height: 1.5em;
+    color: #16bede;
+}
+
+.widget thead{
+  font-weight: bold;
+  color: #183762;
+}
+
+.widget h5{
+  color: #16bede;
+}
+
+/*
+.widget tbody tr:nth-child(even) {
+  background-color:var(--bs-white);
+}
+.widget tbody tr:nth-child(odd) {
+  background-color:var(--bs-gray-200);
+}
+*/
+</style>
+
+<div class="container">
+  <div class="row g-3 justify-content-center">
+
+    {% include 'admin/widgets/total-donated.html.twig' %}
+  
+  </div>
+</div>
+
+<div class="container my-3">
+  <div class="row g-3">
+
+    {% include 'admin/widgets/recent-donations.html.twig' %}
+
+  </div>
+</div>
+
+<div class="container my-3">
+  <div class="row g-3">
+
+    {% include 'admin/widgets/recent-transactions.html.twig' %}
+
+  </div>
+</div>
+
+{% endblock main %}
+
